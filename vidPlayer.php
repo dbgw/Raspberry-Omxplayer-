@@ -32,13 +32,15 @@ if(isset($donnees["BANDEAU_HAUT"]))
 <p id="titre" style="width:100%; font-size:'.$taillePolice.'px; color:#FFFFFF; text-align:center; font-weight:bolder; font-family:Verdana, Arial, Helvetica, sans-serif; b">'.$donnees["TEXTE_HAUT"].'</p>
 </div>';
 }
-/*
+
 echo '<video id="videoPlayer" src="VIDEOS/'.$donnees["FICHIER"].'" autoplay="true"  style="display:block; z-index:0; width:'.$largeur.'px; height:'.$hauteur.'px; vertical-align:middle;">
-</video>';*/
+</video>';
+/*
 require_once 'vidPlayerOmx_control.php';
 echo ("<div>/var/www/html/juggler/omxplayer-web-controls-php/omx_php.sh VIDEOS/".$donnees['FICHIER']."</div>");
 $file = "VIDEOS/".$donnees['FICHIER'];
-	shell_exec ( "var/www/html/juggler/omxplayer-web-controls-php/omx_php.sh ".escapeshellarg($file));
+shell_exec ( "var/www/html/juggler/omxplayer-web-controls-php/omx_php.sh ".escapeshellarg($file));
+*/
 if(isset($donnees["BANDEAU_BAS"]))
 {
 	echo'<div id="bandeau_bas" style="z-index:1; width:'.$largeur.'px; position:absolute; bottom:0px; left:0px; height:150px; background-color:rgba(0,0,0,0.5); vertical-align:middle" >
