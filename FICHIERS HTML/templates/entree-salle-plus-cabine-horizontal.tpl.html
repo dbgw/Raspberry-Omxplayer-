@@ -1,0 +1,55 @@
+<div class="clock"><span></span></div>
+
+<ul class="salles">
+</ul>
+<script>
+
+parseCaisseXml();
+function parseCaisseXml() {
+  //ouverture du fichier cabine_adde 
+  $.get('./data/cabines_adde.xml?v=' + Math.random(), function(data) {
+
+      // Date d'aujourd'hui au format YYMMDD, pour filtrer sur les séances du jour
+      var today = new Date(), today = ('0'+ today.getFullYear()).slice(-2) + ('0' + (today.getMonth()+1)).slice(-2) + ('0' + today.getDate()).slice(-2);
+
+      // On récupère la date du xml et on la met au format YYMMDD
+      var date = $(data).find('Date').text();
+      date = date.split(' ', 1);
+      date = date[0].split('-');
+      date = date[2]+ date[1]+date[0];
+
+      // On ne garde que les fichiers xml qui correspondent aux séances du jour
+      //if (date == today ) {
+        
+          var salles = $(data).find('Salle');
+
+          // On récupère le contenu de chaque salle du xml
+          for (var i = 0, len = salles.length; i < len; i++) { 
+
+            var salle = $(salles[i]);
+            var    id = salle.find('Id');
+            var  film = salle.find('Film');
+            var  etat = salle.find('Etat'); 
+
+            // Le html à incorporer dans le ul salles
+            var  html = '<li class="salle" data-numero="' + id.text() + '"><span>' + id.text() + '</span>' +             
+                           '<div class="film">' +
+                              '<div class="titre"><span>' + film.text() + '</span></div>' +
+                              '<div class="etat"><span>' + etat.text() + '</span></div>' +
+                           '</diV>' 
+                        '</li>';
+            $(html).appendTo('.salles');
+          }
+      //}  
+  });
+}
+
+// Mise à jour horloge
+initClock();
+function initClock() {
+  var now = new Date();
+  $('.clock span').text(now.getHours() + 'H' + ('0' + now.getMinutes()).slice(-2));
+  // Répéter toutes les 20 secondes
+  setTimeout(initClock, 30000);
+}
+</script>

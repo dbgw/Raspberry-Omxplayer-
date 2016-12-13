@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0; padding:0;">
+
+<div id="html-item-container" class="left horizontal fullsize">
+  <div class="bg">
+    <img src="../Images/FILMS/11844.JPG" />
+    <div class="message">
+      <div class="title"><p><span style="color: #222222; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 20px;">Calibration</span></p></div>
+      <div class="content"><p><span style="color: #ffffff; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 1em; line-height: 20px;">Chaque diffuseur vid&eacute;o propose un rendu des couleurs qui lui est propre et qui sera bien souvent diff&eacute;rent de la norme vid&eacute;o. Les fabricants nous font profiter de r&eacute;glages &ldquo;usines&rdquo; pompeux et destin&eacute;s &agrave; en mettre plein la vue en d&eacute;monstration dans des magasins sur-&eacute;clair&eacute;s. Mais une fois le diffuseur install&eacute; chez soi, dans une ambiance plus propice, on est tr&egrave;s loin d&rsquo;avoir une image adapt&eacute;e &agrave; ces nouvelles conditions et fid&egrave;le au rendu attendu.&nbsp;</span></p></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+<style>
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden; /* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+}
+
+/* Affiche à droite */
+#html-item-container.horizontal.right .bg {
+	margin-top:3%;
+}
+#html-item-container.horizontal.right .bg img {
+	width:40%; 
+	display:block;
+	float: right;
+	padding-right:2%;
+	height: auto;
+}
+#html-item-container.horizontal.right div.message {
+	width: 50%;
+	display: block;
+	padding-left: 3%;
+	float: left;
+}
+
+#html-item-container.horizontal.right div.message .title { 
+	margin-top:2%;
+	margin-left: 0%;
+	font-size:3em;
+	color:white;
+	font-family:"Arial Black", Gadget, sans-serif;
+	text-align:left;
+}
+
+#html-item-container.horizontal.right div.message .content {
+	margin-top:0px;
+	font-size:2em;
+	color:white;
+	font-family: 'Futura Condensed', Helvetica, Arial, sans-serif;
+	font-weight:bold; 
+}
+
+/* Affiche à gauche */
+#html-item-container.horizontal.left .bg {
+	margin-top:3%;
+}
+#html-item-container.horizontal.left .bg img {
+	width:40%; 
+	display:block;
+	float: left;
+	padding-left:2%;
+	height: auto;
+}
+#html-item-container.horizontal.left div.message {
+	width: 50%;
+	display: block;
+	padding-left: 3%;
+	float: left;
+}
+
+#html-item-container.horizontal.left div.message .title { 
+	margin-top:2%;
+	margin-left: 0%;
+	font-size:3em;
+	color:white;
+	font-family:"Arial Black", Gadget, sans-serif;
+	text-align:left;
+}
+
+#html-item-container.horizontal.left div.message .content {
+	margin-top:0px;
+	font-size:2em;
+	color:white;
+	font-family: 'Futura Condensed', Helvetica, Arial, sans-serif;
+	font-weight:bold; 
+}
+
+#html-item-container.horizontal.left .bg {
+	background-image: url('./css/522/img/htmlitem-left-bg.png');
+}
+#html-item-container.horizontal.right .bg {
+	background-image: url('./css/522/img/htmlitem-right-bg.png');
+}
+#html-item-container.vertical .bg {
+	background-image: url('./css/522/img/htmlitem-vertical-bg.png');
+}
+</style>

@@ -1,0 +1,130 @@
+{{#salles}}
+  <div class="numero-salle slug-{{slug}}"><span>{{numero}}</span></div>
+  {{#films}}
+    <div class="film slug-{{slug}}">
+      <div class="titre"><span>{{title}}</span></div>
+      <div class="affiche"><img src="{{affiche_url}}"></div>
+      <ul class="seances">
+        {{#seances}}
+          <li class="horaire"><span>{{horaire}}</span></li>
+        {{/seances}}
+      </ul>
+      <div class="info">
+        {{#resume}}<div class="resume"><span>{{resume}}</span></div>{{/resume}}
+        {{#duree}}<div class="duree"><span>{{duree}}</span></div>{{/duree}}
+        {{#seances}}<div class="version slug-{{version}} horaire-{{horaire}}" style="display:none;"><span>{{version}}</span></div>{{/seances}}
+        {{#public}}<div class="public slug-{{slug}}"><span>{{name}}</span></div>{{/public}}
+        {{#dimension}}<div class="dimension slug-{{slug}}"><span>{{name}}</span></div>{{/dimension}}
+      </div>
+      <div class="countdown salle-{{numero}}">
+        <span></span>
+      </div>
+    </div>
+  {{/films}}
+{{/salles}}
+
+<script>
+var current_num_salle = $('.numero-salle span').html();
+// Par défaut on masque tous les films
+$('.film').hide();
+// Mise à jour régulière du film affiché (= séance la plus proche)
+initFilmUpdates();
+// Mise à jour régulière du countdown "Film débuté depuis X minutes"
+initCountdownUpdates();
+
+// Mise à jour régulière du film affiché (= séance la plus proche)
+function initFilmUpdates() {
+  // Combien de minutes affiche-t-on le film après le début de la séance (défaut : 20 minutes)
+  var display_duration = 20;
+  if(dataLoaded.template_data !== null && typeof(dataLoaded.template_data.display_duration) !== "undefined")
+    display_duration = dataLoaded.template_data.display_duration;
+
+  // Date actuelle moins display_duration minutes
+  var now = new Date((new Date()).getTime() - display_duration * 60 * 1000);
+
+  // Masquage de tous les films
+  $('.film').hide();
+  // On détermine quel horaire est le plus proche parmi la liste des séances affichables :
+  var closestHoraire = false;
+  // On récupère tous les horaires, on les trie par ordre chronologique
+  var horaires = $('.film .seances .horaire').removeClass('selected').sort(function(a, b) { return $(a).text().localeCompare($(b).text()); });
+  // On sélectionne la première séance à venir (horaire supérieur à "now")
+  for (var i = 0, len = horaires.length; i <len; i++) {
+    // On sélectionne la première séance à venir
+    if (isIncoming($(horaires[i]).text(), now)) {
+      closestHoraire = $(horaires[i]);
+      break;
+    }
+  }
+  // Si on n'a pas trouvé de séance convenable, on prend la dernière de la journée
+  if (!closestHoraire) closestHoraire = horaires.last();
+  // Afficher le film correspondant
+  closestHoraire.addClass('selected').parents('.film').show();
+  // Afficher la version correspondant à la séance choisie (cela peut différer d'une séance à l'autre)
+  closestHoraire.parents('.film').find('.version').hide();
+  closestHoraire.parents('.film').find('.version.horaire-'+closestHoraire.text()).show()
+  // Répéter toutes les minutes
+  setTimeout(initFilmUpdates, 60000);
+}
+
+// Mise à jour régulière du countdown "Film débuté depuis X minutes"
+function initCountdownUpdates() {
+  
+  // Répeter toutes les minutes
+  setTimeout(initCountdownUpdates, 60000);
+}
+
+initParseCabineFile();
+function initParseCabineFile() {
+  parseCabineFile(function(data) {
+    if(data.status == 'ok')
+      setTimeout(initParseCabineFile, 1000);   
+    else
+      console.log(data.label)
+  });
+}
+
+function parseCabineFile(callback) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET","./data/CABINE.XML?v=" + Math.random(),false);
+
+  xmlhttp.onreadystatechange = function (oEvent) {  
+    if (xmlhttp.readyState === 4) {  
+      if (xmlhttp.status === 200) {  
+        xmlDoc = xmlhttp.responseXML; 
+        var salles = xmlDoc.getElementsByTagName("SALLE");
+        for (i=0; i < salles.length; i++) {
+          // Si un film a commencé entre 0min et 15min, nous affichons "Film débuté depuis x min" 
+          // Après 15min nous affichons "Film en cours" 
+          // A 15min avant la fin du film nous affichons "Fin du film dans x min" 
+          // Pendant l’inter séance, afficher "Inter séance"
+          var salle     = salles[i],
+              num_salle = salles[i].getElementsByTagName("NUMSALLE")[0].childNodes[0].nodeValue | 0;
+          if($('.countdown.salle-' + num_salle).length > 0) {
+            var label           = $('.countdown.salle-' + num_salle).find('span'),
+                status          = salles[i].getElementsByTagName("STATUT")[0].childNodes[0].nodeValue,
+                position_seance = salles[i].getElementsByTagName("POSITIONSEANCE")[0].childNodes[0].nodeValue | 0,
+                position_film   = salles[i].getElementsByTagName("POSITIONFILM")[0].childNodes[0].nodeValue | 0,
+                duree_film      = salles[i].getElementsByTagName("DUREEFILM")[0].childNodes[0].nodeValue | 0;
+            if(status == 'INTERSEANCE') {
+              label.html('Interséance');
+              return;
+            }
+            if(position_film <= 15)
+              label.html('Film débuté depuis ' + position_film + ' min');
+            else if((duree_film - position_film) < 15)
+              label.html('Fin du film dans ' + Math.max(duree_film - position_film, 1) + ' min');
+            else {
+              label.html('Film en cours');
+            }
+          }
+        }
+        callback({status : 'ok'});
+      } else {  
+        callback({status : 'ko', label : 'File CABINE.XML not found'});  
+      }  
+    }  
+  };
+  xmlhttp.send();
+}
+</script>

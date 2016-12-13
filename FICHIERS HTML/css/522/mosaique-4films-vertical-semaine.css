@@ -1,0 +1,81 @@
+@font-face{
+  font-family: 'BeBasNeue';
+  src: url('./fonts/bebasneue.eot');
+  src: url('./fonts/bebasneue.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/bebasneue.ttf') format('truetype');
+}
+
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden;  /*permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+  text-align:left;
+}
+.conteneur {
+  background:url('./img/4filmbg.jpg?') #eeeeee;
+  background-size: contain;
+  font-family: 'Futura Condensed', Helvetica, Arial, sans-serif; 
+  color:#000; 
+  position:relative;
+  margin:0 auto;
+  height:1920px;
+  width:1080px;
+  overflow:hidden;
+  
+}
+
+.clock {position: absolute; right: 19px; top: 25px; color: #380850; font-family: 'BeBasNeue'; font-weight:bold; font-size: 32px; text-transform:lowercase; }
+
+.film { top:105px; width: 540px; height:913px; float:left; position:relative; }
+
+
+.film .affiche { position: absolute; top: 88px; left: 45px; width: 435px; height: 573px; overflow: hidden; }
+.film .affiche img { width:100%; height:100%; }
+
+.film .titre { font-family: 'BeBasNeue'; font-weight:bold; position:absolute; color: #fff; top:4px; left:30px; width: 480px; overflow: hidden; height: 80px; font-size: 45px; line-height: 40px; text-align: center; vertical-align:bottom; }
+.film .titre span {  }
+
+.film .titre-original { display: none; }
+
+.film .info .realisateur { display: none; }
+
+.film .info .interpretes { display: none; }
+
+.film .info .duree { position:absolute; top:695px; left:68px; color:#000; width:182px; height:38px; overflow:hidden; font-size:14px; }
+.film .info .duree label { display: none; }
+.film .info .duree span { font-family: 'BeBasNeue'; font-size:32px; font-weight:bold; }
+
+.film .info .genre { display: none; }
+
+.film .info .dimension { position:absolute; display:block; width:54px; height:54px; top:672px; left:355px; }
+.film .info .dimension label { display:none; }
+.film .info .dimension span { display:none; }
+.film .info .dimension.slug-2d  { display:none; }
+.film .info .dimension.slug-3d  { background-size:contain; background-repeat:no-repeat; width:54px; height:54px; background-image: url('./img/picto-3d.png'); }
+
+.film .info .public { position:absolute; display:block; width:54px; height:54px; top:672px; left:420px; }
+.film .info .public span { display:none; }
+.film .info .public label { display:none; }
+
+.film .info .public.slug-tous-publics   { display:none;}
+.film .info .public.slug-avertissement  {  background-size:contain; background-repeat:no-repeat; width:54px; height:54px; background-image: url('./img/picto-avertissement.png'); }
+.film .info .public.slug-12-ans         { background-size:contain; background-repeat:no-repeat; width:54px; height:54px; background-image: url('./img/picto-12-ans.png'); }
+.film .info .public.slug-16-ans         { background-size:contain; background-repeat:no-repeat; width:54px; height:54px; background-image: url('./img/picto-16-ans.png'); }
+.film .info .public.slug-18-ans         { background-size:contain; background-repeat:no-repeat; width:50px; height:50px; background-image: url('./img/picto-18-ans.png'); }
+
+/*.film .info .public { display:none; }*/
+
+.film .resume{ display: none; }
+
+
+.film ul.seances {position: absolute; margin-left:-36px; text-transform:lowercase; list-style:none; line-height:14px; top: 750px; left:24px; width: 520px; height:120px; /*overflow:hidden;*/ color:#fff; font-size:14px; font-weight:bold; }
+
+.film ul.seances li.col { display:inline-block; width:70px; height: 100px; padding-left:0px; float:left; margin-top: 5px; }
+
+/*.film .seances .horaire .version { display:inline !important; margin-left:3px; color:red; }*/
+/*.film .seances .horaire .version.slug-vf { display:none; }*/
+.film .seances .horaire .version.slug-vf { display:none; }
+.film .seances .horaire .version.slug-vo { display:inline !important; margin-left:3px; color:red; }
+.film .seances .horaire .version.slug-vost { display:inline !important; margin-left:3px; color:red; }

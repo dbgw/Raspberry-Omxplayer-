@@ -1,0 +1,72 @@
+
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden; /* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+  text-align:center;
+}
+.conteneur {
+  background:url('./img/bgH1366.jpg');
+  background-size: contain;
+  font-family: Helvetica, sans-serif; 
+  color:#fff; 
+  text-align:left;
+  position:relative;
+  margin:0 auto;
+  height:768px;
+  width:1366px;
+}
+
+.numero-salle { position: absolute; top:0; left: 20px; width: 180px; height: 190px; background-repeat:no-repeat; }
+.numero-salle span {display: none;}
+.numero-salle.slug-salle-1 { background-image:url('./img/logo-salle-1.png'); }
+.numero-salle.slug-salle-2 { background-image:url('./img/logo-salle-2.png'); }
+.numero-salle.slug-salle-3 { background-image:url('./img/logo-salle-3.png'); }
+.numero-salle.slug-salle-4 { background-image:url('./img/logo-salle-4.png'); }
+.numero-salle.slug-salle-5 { background-image:url('./img/logo-salle-5.png'); }
+.numero-salle.slug-salle-6 { background-image:url('./img/logo-salle-6.png'); }
+.numero-salle.slug-salle-7 { background-image:url('./img/logo-salle-7.png'); }
+
+.film { }
+.film .titre { position:absolute; width: 600px; height: 130px;font-size:56px; top:42px; left:205px; text-overflow:ellipsis; letter-spacing: -2px; /*white-space:nowrap;*/ overflow:hidden; font-weight: bold; text-transform: uppercase; }
+
+.film .affiche { position:absolute; left: 840px; width:500px; height:742px; top:14px; overflow:hidden; }
+.film .affiche img { width:100%; min-height:100%; }
+
+.film .seances { position: absolute; top: 610px; left:0px ;right:0px; /*display:none; */} /* on n'affiche pas les séances mais on les garde dans le dom pour afficher le bon film en fonction de l'heure */
+.film .seances .horaire { display:none;  }
+.film .seances .horaire.selected { display:block; font-size: 50px;font-weight: bold; list-style:none; text-transform: lowercase;}
+.film .seances .horaire.selected:before { content: "S\E9 ance  : "; font-weight: bold; text-transform: capitalize;}
+
+
+.film .info > * { display:inline-block; height:100px; background-repeat:no-repeat; background-position: center center; }
+.film .info > * > span { display : none;} /* on remplace le texte par des images */
+
+.film .info { position:absolute; top:470px; left: 35px; right: 1010px; text-align: left;}
+.film .info .duree { position : absolute; top:-100px; left: 0px; width: 500px; text-align: left; text-transform: lowercase;}
+.film .info .duree span { display: block;font-size: 50px; font-weight: bold;}
+.film .info .duree span:before { content : "Dur\E9 e : ";font-size: 50px; font-weight: bold; text-transform: capitalize;}
+
+.film .info .salle  { display: none;}
+
+
+.film .info .public                     { top:150px; width:100px; left:-200px; }
+.film .info .public.slug-tous-publics   { display:none; }
+.film .info .public.slug-avertissement  { background-image: url('./img/picto-avert-white-100x100.png'); }
+.film .info .public.slug-12-ans         { background-image: url('./img/picto-12-ans-white-100x100.png'); }
+.film .info .public.slug-16-ans         { background-image: url('./img/picto-16-ans-white-100x100.png'); }
+.film .info .public.slug-18-ans         { background-image: url('./img/picto-18-ans-white-100x75.png'); }
+
+.film .info .dimension                  { top:150px; width: 100px; }
+.film .info .dimension.slug-2d          { display:none; }
+.film .info .dimension.slug-3d          { background-image: url('./img/picto-3d-red-100x101.png'); }
+
+.film .info .version                    { top:150px; width: 100px; }
+.film .info .version.slug-vo            { background-image: url('./img/picto-vo-86x100.png'); }
+.film .info .version.slug-vost          { background-image: url('./img/picto-vost-86x100.png'); }
+.film .info .version.slug-vf            { background-image: url('./img/picto-vf-86x100.png'); }
+
+.film .countdown { position:absolute; top: 690px; left: 36px; text-align: right; font-size: 50px; font-weight: bold; }
+

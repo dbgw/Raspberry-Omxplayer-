@@ -1,0 +1,57 @@
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden; /* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+  text-align:center;
+}
+.conteneur {
+  background:url('./img/4fbg2.jpg');
+  background-size: contain;
+  font-family: Helvetica, Arial, sans-serif; 
+  color:#fff; 
+  text-align:center;
+  position:relative;
+  margin:0 auto;
+  height:720px;
+  width:1280px;
+}
+
+.film { width: 25%; height:100%; float:left; position:relative; font-weight: bold; }
+
+.film .titre { display: none; }
+.film .titre span { display: none; }
+/*.film .titre { position: absolute; top: 397px; left: 7px; right:7px; overflow:hidden; height:67px; }
+.film .titre span { display: table-cell; height: 67px; line-height: 33px ;width:307px; font-size: 31px; vertical-align: middle; color:#000;  }*/
+
+.film .affiche { position:absolute; width:315px; height:450px; top: 0px; left:0px; }
+.film .affiche img { width:100%; height:100%; }
+
+.film ul.seances { position:absolute; top:530px; left:20px; right:20px; list-style:none; margin:0; padding:0; font-size:32px; }
+.film ul li { width: 50%; float:left; display:block; padding-bottom:8px; }
+.film ul li.horaire.selected { color: #FDC403; }
+.film ul li.delimiter { display:none; }
+
+.film .info { position: absolute; top: 462px; font-size: 2px; left: 47px; right: 43px; height: 39px; text-align:left; }
+
+.film .info > * { position: relative; display:inline-block; text-align:center; height:47px; width:43px; margin:3px 2px; }
+.film .info > * { background-repeat:no-repeat; background-position: center center; background-size:contain; }
+.film .info > * > span { display: none; } /* pour Europa, on remplace le texte par des images, sauf pour la durée */
+
+.film .info > .duree { position:absolute; bottom:10px; right:03px; font-size:27px; height:20px; width:60px; margin:0; color:#000000; }
+.film .info > .duree > span { display: block; }
+
+.film .info .public.slug-tous-publics   { background-image: url('./img/tp.png?'); }
+.film .info .public.slug-avertissement  { background-image: url('./img/avertissement.png'); }
+.film .info .public.slug-12-ans         { background-image: url('./img/12.png'); }
+.film .info .public.slug-16-ans         { background-image: url('./img/16.png'); }
+.film .info .public.slug-18-ans         { background-image: url('./img/18.png'); }
+
+.film .info .dimension.slug-2d          { display:none; }
+.film .info .dimension.slug-3d          { background-image: url('./img/3d.png'); }
+
+.film .info .version.slug-vo            { background-image: url('./img/vo.png'); }
+.film .info .version.slug-vf            { background-image: url('./img/vf.png'); }
+.film .info .version.slug-vost            { background-image: url('./img/vost.png'); }
+.film .info .version.slug-vfst            { background-image: url('./img/vfst.png'); }

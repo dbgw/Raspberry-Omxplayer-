@@ -1,0 +1,66 @@
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden; /* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+}
+.conteneur {
+  background: #fff url('./img/bgtms.jpg') no-repeat;
+  background-size: contain;
+  font-family: Arial, Helvetica, sans-serif; 
+  color:#fff; 
+  position:relative;
+  margin:0 auto;
+  height:768px;
+  width:1366px;
+  font-size: 45px;
+}
+
+.clock { display: none; }
+
+ul.salles { position: absolute; top: 11px; margin: 0; padding: 0; left:30px; right:0; list-style:none; }
+ul.salles li.salle { height: 83px; width: 40px; line-height:67px; margin-bottom: 0px; }
+ul.salles li.salle .nom.slug-salle-1 { height: 70px; background:url('./img/01.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-2 { height: 70px; background:url('./img/02.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-3 { height: 70px; background:url('./img/03.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-4 { height: 70px; background:url('./img/04.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-5 { height: 70px; background:url('./img/05.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-6 { height: 70px; background:url('./img/06.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-7 { height: 70px; background:url('./img/07.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-8 { height: 70px; background:url('./img/08.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom.slug-salle-9 { height: 70px; background:url('./img/09.png') no-repeat center center; margin-left:-25px; background-size: contain; }
+ul.salles li.salle .nom span { display:none; }
+
+ul.salles li.salle > .numero { display:none; }
+
+
+ul.salles li.salle .film { position:absolute; margin-top:-50px; left:-75px; right:200px; padding-left:220px; }
+ul.salles li.salle .film .seances { display: none; }
+ul.salles li.salle .film .seances li { display: none; } /* on n'affiche pas les séances mais on les garde dans le dom pour afficher le bon film en fonction de l'heure */
+ul.salles li.salle .film .seances li.selected { display:block; }
+ul.salles li.salle .film .titre { overflow: hidden; width:550px; text-overflow: ellipsis; white-space: nowrap; font-weight:bold; letter-spacing:0px; margin: -10px 0 0 -50px; color: #a90804; }
+ul.salles li.salle .film .etat { width:650px; font-style:italic; text-transform:uppercase; overflow: hidden; letter-spacing: 0px; color:#000; margin-top:20px; margin-left:490px; font-weight:bold; text-align:right; font-size: 35px;top: -36px;
+position: absolute; }
+ul.salles li.salle .film .info { position:absolute; right:130px; top:-3px; }
+
+ul.salles li.salle .film .info > * { position: relative; text-align:center; height:65px; width:43px; margin:0; }
+ul.salles li.salle .film .info > * { background-repeat:no-repeat; background-position: center center; float: right; margin-left:10px; }
+ul.salles li.salle .film .info > * > span { display: none; } /*  on remplace le texte par des images, sauf pour la durée (cf. plus loin) */
+
+ul.salles li.salle .film .info > .duree { display:none; }
+
+ul.salles li.salle .film .info .public.slug-tous-publics   { display:none;}
+ul.salles li.salle .film .info .public.slug-avertissement  { display:none;}
+ul.salles li.salle .film .info .public.slug-12-ans         { display: none;}
+ul.salles li.salle .film .info .public.slug-16-ans         { display: none;}
+ul.salles li.salle .film .info .public.slug-18-ans         { display: none;}
+
+ul.salles li.salle .film .info .dimension.slug-2d          { display:none; }
+ul.salles li.salle .film .info .dimension.slug-3d          { display:none; }
+
+ul.salles li.salle .film .info .version.slug-vo            { display:none; }
+ul.salles li.salle .film .info .version.slug-vf            { display:none;}
+ul.salles li.salle .film .info .version.slug-vost          { display:none;}
+
+ul.salles li.salle .nb-places { display:none; }

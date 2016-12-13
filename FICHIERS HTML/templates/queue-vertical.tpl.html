@@ -1,0 +1,27 @@
+<div class="clock"><span></span></div>
+
+{{#template_data}}
+{{#title}}<div class="title">{{ title }}{{#display_arrow}}<div class="arrow"></div>{{/display_arrow}}</div>{{/title}}
+{{^title}}<div class="title">File d'attente{{#display_arrow}}<div class="arrow"></div>{{/display_arrow}}</div>{{/title}}
+
+{{/template_data}}
+
+{{#template_data}}
+<ul class="main salles-{{nb_slots}}" bg="{{bg}}" >
+{{/template_data}}
+{{^template_data}}
+<ul class="main salles">
+{{/template_data}}
+{{#seances}}
+  <li class="salle" data-numero={{salle_num}}>
+    <div class="numero"><span>{{salle_num}}</span></div>
+    <div class="film">
+      <div class="titre"><span>{{film_title}}</span></div>
+      <ul class="seances" style="display:none;">
+        <li class="horaire selected"><span>{{horaire}}</span></li>
+      </ul>
+    </div>
+    <div class="feu {{ color }}"><span></span></div>
+  </li>
+{{/seances}}
+</ul>

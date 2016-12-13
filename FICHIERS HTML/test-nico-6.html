@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0; padding:0;" onload="save_canvas();">
+<form method="POST" enctype="multipart/form-data" action="/ajax/item/create" id="myForm">
+  <input type="hidden" name="media" id="media" value="" />
+  <input type="hidden" name="intitule" id="intitule" value="Test Nico 6" />
+  <input type="hidden" name="action" id="action" value="item_upload" />
+  <input type="hidden" name="etablissement_id" id="etablissement_id" value="522" />
+  <input type="hidden" name="item_id" id="item_id" value="" />
+</form>
+
+<div id="html-item-container" class="left horizontal fullsize">
+  <div class="bg">
+    <img src="../Images/FILMS/49781.JPG" />
+    <div class="message">
+      <div class="title"><p><span style="color: #ff0000;">COUCOU</span></p></div>
+      <div class="content"><p><span style="font-size: 2em;"><strong><span style="font-family: 'Helvetica Neue', 'Trebuchet MS', Arial, sans-serif; line-height: 18px; text-align: justify;">Les D93 et D96&nbsp;arborent un &eacute;cran tactile mais peuvent aussi &ecirc;tre pilot&eacute;s via une application &agrave; partir d'un smartphone (Wi-Fi).&nbsp;Celle-ci permet de programmer les robots, de les lancer &agrave; distance et de restreindre leur zone de fonctionnement.</span></strong></span></p></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="../../js/html2canvas.js"></script>
+<script type="text/javascript">
+  function save_canvas() {
+    console.log("hello");
+    html2canvas(document.body, {
+      // 'useCORS' : true,
+      'proxy'   : "https://html2canvas.appspot.com/query",
+      onrendered: function(canvas) {
+        $('#media').val(canvas.toDataURL("image/png"));
+        document.getElementById("myForm").submit();
+      }
+    });
+  }
+</script>
+
+<style>
+#myHideFrame {
+    position: absolute;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+}
+</style>
+
+<style>
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden; /* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+}
+
+/* Affiche à droite */
+#html-item-container.horizontal.right .bg {
+	margin-top:3%;
+}
+#html-item-container.horizontal.right .bg img {
+	width:40%; 
+	display:block;
+	float: right;
+	padding-right:2%;
+	height: auto;
+}
+#html-item-container.horizontal.right div.message {
+	width: 50%;
+	display: block;
+	padding-left: 3%;
+	float: left;
+}
+
+#html-item-container.horizontal.right div.message .title { 
+	margin-top:2%;
+	margin-left: 0%;
+	font-size:3em;
+	color:white;
+	font-family:"Arial Black", Gadget, sans-serif;
+	text-align:left;
+}
+
+#html-item-container.horizontal.right div.message .content {
+	margin-top:0px;
+	font-size:2em;
+	color:white;
+	font-family: 'Futura Condensed', Helvetica, Arial, sans-serif;
+	font-weight:bold; 
+}
+
+/* Affiche à gauche */
+#html-item-container.horizontal.left .bg {
+	margin-top:3%;
+}
+#html-item-container.horizontal.left .bg img {
+	width:40%; 
+	display:block;
+	float: left;
+	padding-left:2%;
+	height: auto;
+}
+#html-item-container.horizontal.left div.message {
+	width: 50%;
+	display: block;
+	padding-left: 3%;
+	float: left;
+}
+
+#html-item-container.horizontal.left div.message .title { 
+	margin-top:2%;
+	margin-left: 0%;
+	font-size:3em;
+	color:white;
+	font-family:"Arial Black", Gadget, sans-serif;
+	text-align:left;
+}
+
+#html-item-container.horizontal.left div.message .content {
+	margin-top:0px;
+	font-size:2em;
+	color:white;
+	font-family: 'Futura Condensed', Helvetica, Arial, sans-serif;
+	font-weight:bold; 
+}
+
+#html-item-container.horizontal.left .bg {
+	background-image: url('./css/522/img/htmlitem-left-bg.png');
+}
+#html-item-container.horizontal.right .bg {
+	background-image: url('./css/522/img/htmlitem-right-bg.png');
+}
+#html-item-container.vertical .bg {
+	background-image: url('./css/522/img/htmlitem-vertical-bg.png');
+}
+</style>

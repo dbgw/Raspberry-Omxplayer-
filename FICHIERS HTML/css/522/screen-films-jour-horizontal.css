@@ -1,0 +1,60 @@
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden;/* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+}
+.conteneur {
+  background: #fff url('./img/screen-films-jour-vertical-bg.jpg');
+  background-size: contain;
+  font-family: Arial, Helvetica, sans-serif; 
+  color:#000; 
+  position:relative;
+  margin:0 auto;
+  height:768px;
+  width:1280px;
+}
+
+.clock { position:absolute; top:50px; right:30px; color:#000000; font-weight:bold;}
+.films { height:100%; position:absolute; top:60px; left:30px; }
+.film { width: 100%; position:relative; }
+
+.film .titre { overflow: hidden; overflow: hidden; text-align: left; color: #000; margin: 0;}
+.film .titre span { display: table-cell; height: 100px; line-height: 84px; width: 916px; font-size: 35px; vertical-align: middle; }
+
+.film .affiche { position:absolute; top: 205px; left:70px; right:82px; width: 945px; height: 1310px; overflow: hidden; display: none; } /* On n'impose pas de height pour que l'image garde ses proportions */
+.film .affiche img { width:100%; height:100%; }
+
+.film ul.seances { text-align:left; list-style:none; margin:0 0 20px 0; padding:0; font-size:40px; width: 1020px; font-weight: bold; text-transform: lowercase; }
+.film ul.seances li.horaire { display:inline-block; vertical-align:top; }
+.film ul.seances li.horaire.selected { color: #fceb26;}
+.film ul.seances li.delimiter { display:inline-block; vertical-align:top;} /* tiret en CSS */
+.film ul.seances li.delimiter:after { content: "-";}
+
+/* version de la séance en face de chaque horaire */
+.film ul.seances li.horaire .version { width: 70px; height: 60px; background-position: 0 11px; background-size:contain; background-repeat: no-repeat;  margin-left: 13px; display: none; }
+.film ul.seances li.horaire .version.slug-vost  { background-image: url('./img/vitrine-picto-vost.png'); }
+.film ul.seances li.horaire .version.slug-vo    { background-image: url('./img/vitrine-picto-vo70.png');}
+.film ul.seances li.horaire .version.slug-vf    { background-image: url('./img/vitrine-picto-vf70.png'); }
+.film ul.seances li.horaire .version span       { display:none; }
+
+.film .info { position: absolute; top: 1562px; left:0; right:0px; height: 106px; text-align:right;background: #fceb26; display:none; }
+
+.film .info .public, .film .info .dimension {  text-align:center; height:100px; width:100px; margin:0 60px 28px 0;
+                  background-repeat:no-repeat; background-position: center center; background-size:contain; }
+.film .info > * > span { display: none; } /* on remplace le texte par des images */
+
+.film .info .duree { position:absolute; top:0px; left:0px; font-size:57px; line-height:100px; width: 1080px; height:100px; margin:0; color: #0008b1;  text-align: left; text-transform: lowercase; font-weight: bold;}
+.film .info .duree span:before { content: "Dur\E9 e : "; text-transform: uppercase; color: #0008b1; text-align: top; font-weight: normal; font-size:30px; margin-right: 20px;}
+.film .info .duree  span { display: block; margin-left: 40px;}
+
+.film .info .public, .film .info .dimension { display: inline-block; background-position: center center; background-size:contain; background-repeat: no-repeat; }
+.film .info .public.slug-tous-publics   { display:none; }
+.film .info .public.slug-avertissement  { background-image: url('./img/picto-avertissement100.png'); }
+.film .info .public.slug-12-ans         { background-image: url('./img/picto-12-ans100.png'); }
+.film .info .public.slug-16-ans         { background-image: url('./img/picto-16-ans100.png'); }
+.film .info .public.slug-18-ans         { background-image: url('./img/picto-18-ans100.png'); }
+
+.film .info .dimension.slug-2d          { display:none; }
+.film .info .dimension.slug-3d          { background-image: url('./img/picto-3d100.png'); }

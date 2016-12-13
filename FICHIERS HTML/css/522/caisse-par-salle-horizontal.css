@@ -1,0 +1,65 @@
+@font-face{
+  font-family: 'BeBasNeue';
+  src: url('./fonts/bebasneue.eot');
+  src: url('./fonts/bebasneue.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/bebasneue.ttf') format('truetype');
+}
+
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden; /* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+}
+.conteneur {
+  background:url('./img/caisse-bg.jpg') no-repeat;
+  background-size: contain;
+  font-family: 'BeBasNeue'; 
+  color:#000; 
+  position:relative;
+  margin:0 auto;
+  height:1080px;
+  width:1920px;
+  font-size: 78px;
+}
+
+.clock {display: block; text-align: right; color: white; font-size: 45px; padding-top: 25px; padding-right: 172px; color: #3b114c;}
+
+ul.salles { position: absolute; top: 215px; margin: 0; padding: 0; left:150px; right:0; list-style:none; }
+ul.salles li.salle { height: 90px; line-height:90px; margin-bottom: 14px; }
+
+ul.salles li.salle > .nom { display:none; }
+ul.salles li.salle > .type { display:none; }
+ul.salles li.salle > .numero { display:none; }
+
+ul.salles li.salle .film { position:absolute; left:100px; right:270px; padding-left:220px; }
+ul.salles li.salle .film .seances { position:absolute; left:0; top: 0; padding:0; list-style:none; width: 220px; text-align:center; color: #3b114c; }
+ul.salles li.salle .film .seances li { display: none; } /* on n'affiche pas les séances mais on les garde dans le dom pour afficher le bon film en fonction de l'heure */
+ul.salles li.salle .film .seances li.selected { display:block; }
+ul.salles li.salle .film .titre { overflow: hidden; width:1000px; text-overflow: ellipsis; white-space: nowrap; color: white; }
+ul.salles li.salle .film .info { position:absolute; right:24px; top:2px; }
+
+ul.salles li.salle .film .info > * { position: relative; display:inline-block; text-align:center; height:83px; width:70px; margin:0; }
+ul.salles li.salle .film .info > * { background-repeat:no-repeat; background-position: center center; }
+ul.salles li.salle .film .info > * > span { display: none; } /*  on remplace le texte par des images, sauf pour la durée (cf. plus loin) */
+
+ul.salles li.salle .film .info > .duree { display:none; }
+
+ul.salles li.salle .film .info .public.slug-tous-publics   { display:none; /*background-image: url('./img/picto-tous-publics-70x83.png');*/ }
+ul.salles li.salle .film .info .public.slug-avertissement  { background-image: url('./img/avert5.png'); }
+ul.salles li.salle .film .info .public.slug-12-ans         { background-image: url('./img/12ans5.png'); }
+ul.salles li.salle .film .info .public.slug-16-ans         { background-image: url('./img/16ans5.png'); }
+ul.salles li.salle .film .info .public.slug-18-ans         { background-image: url('./img/18ans5.png'); }
+
+ul.salles li.salle .film .info .dimension.slug-2d          { display:none; }
+ul.salles li.salle .film .info .dimension.slug-3d          { background-image: url('./img/3d5.png'); }
+
+ul.salles li.salle .film .info .version.slug-vo            { background-image: url('./img/vo5.png'); }
+ul.salles li.salle .film .info .version.slug-vf            { background-image: url('./img/vf5.png'); }
+ul.salles li.salle .film .info .version.slug-vost            { background-image: url('./img/vost5.png'); }
+ul.salles li.salle .film .info .version.slug-vfst            { background-image: url('./img/vfst.png'); }
+
+ul.salles li.salle .film .info .tags.slug-4k            { background-image: url('./img/4k.png'); }
+
+ul.salles li.salle .nb-places { position:absolute; right:90px; width:260px;text-align:center; color: #3b114c; }

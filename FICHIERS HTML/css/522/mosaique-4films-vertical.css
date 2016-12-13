@@ -1,0 +1,113 @@
+@font-face{
+  font-family: 'Futura Bold';
+  src: url('./fonts/futura-bold.eot');
+  src: url('./fonts/futura-bold.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/futura-bold.woff') format('woff'),
+       url('./fonts/futura-bold.ttf') format('truetype'),
+       url('./fonts/futura-bold.svg#futura-bold') format('svg');
+  font-weight: normal;
+  font-style: normal
+}
+@font-face{
+  font-family: 'Futura Condensed Bold';
+  src: url('./fonts/futura-condensed-bold.eot');
+  src: url('./fonts/futura-condensed-bold.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/futura-condensed-bold.woff') format('woff'),
+       url('./fonts/futura-condensed-bold.ttf') format('truetype'),
+       url('./fonts/futura-condensed-bold.svg#futura-condensed-bold') format('svg');
+  font-weight: normal;
+  font-style: normal
+}
+@font-face{
+  font-family: 'Futura Condensed';
+  src: url('./fonts/futura-condensed.eot');
+  src: url('./fonts/futura-condensed.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/futura-condensed.woff') format('woff'),
+       url('./fonts/futura-condensed.ttf') format('truetype'),
+       url('./fonts/futura-condensed.svg#futura-condensed') format('svg');
+  font-weight: normal;
+  font-style: normal
+}
+
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden;  /*permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+  text-align:left;
+}
+.conteneur {
+  background:url('./img/fullscreen-vertical-bg2.jpg?') white;
+  background-size: contain;
+  font-family: 'Futura Condensed', Helvetica, Arial, sans-serif; 
+  color:#000; 
+  position:relative;
+  margin:0 auto;
+  height:1920px;
+  width:1080px;
+  overflow:hidden;
+  
+}
+
+.clock { display:none;}
+
+.film { width: 540px; height:643px; float:left; position:relative; }
+
+
+.film .affiche { position: absolute; top: 4px; left: 9px; width: 256px; height: 340px; overflow: hidden; }
+.film .affiche img { width:100%; height:100%; }
+
+.film .titre { font-family: 'Futura Bold'; position:absolute; color: #D84337; top:4px; left:270px; width: 260px; overflow: hidden; height: 45px; font-size: 19px; line-height: 23px; vertical-align:bottom; }
+.film .titre span {  }
+
+.film .titre-original { overflow: hidden; display:block; margin-left:270px; font-size:12px; color:#FFF; margin-top:54px; width:260px; text-overflow: ellipsis; white-space: nowrap; }
+.film .titre-original label { color: #5599C8; font-size:10px; }
+.film .titre-original span { font-family: 'Futura Bold'; }
+
+.film .info .realisateur { position:absolute; top:77px; left:277px; color:#000; width:190px; height:38px; overflow:hidden; font-size:14px; }
+.film .info .realisateur label { display:block; color: #5599C8; font-family: 'Futura Condensed'; }
+.film .info .realisateur span { font-family: 'Futura Condensed'; }
+
+.film .info .interpretes { position:absolute; top:122px; left:277px; color:#000; width:190px; height:90px; overflow:hidden; font-size:14px; }
+.film .info .interpretes label { display:block; color: #5599C8; font-family: 'Futura Condensed'; }
+.film .info .interpretes span { font-family: 'Futura Condensed'; }
+
+.film .info .duree { position:absolute; top:215px; left:277px; color:#FFF; width:182px; height:38px; overflow:hidden; font-size:14px; }
+.film .info .duree label { display:block; color: #17313a; font-family: 'Futura Condensed'; }
+.film .info .duree span { font-family: 'Futura Condensed'; font-size:18px; }
+
+.film .info .genre { position:absolute; top:260px; left:277px; color:#000; width:182px; height:38px; overflow:hidden; font-size:14px; }
+.film .info .genre label { display:block; color: #5599C8; font-family: 'Futura Condensed'; }
+.film .info .genre span { font-family: 'Futura Condensed'; }
+
+.film .info .dimension { position:absolute; top:304px; left:277px; color:#FFF; width:182px; height:38px; overflow:hidden; font-size:14px; }
+.film .info .dimension label { display:block; color: #17313a; font-family: 'Futura Condensed'; }
+.film .info .dimension span { font-family: 'Futura Condensed'; }
+
+.film .info .public { position:absolute; display:block; width:50px; height:70px; top:275px; left:455px; }
+.film .info .public span { display:none; }
+.film .info .public label { display:none; }
+
+.film .info .public.slug-tous-publics   { display:none; }
+.film .info .public.slug-avertissement  { display:none; }
+.film .info .public.slug-12-ans         { background-size:contain; width:30px; height:30px; background-image: url('./img/picto-12-ans-black.png'); }
+.film .info .public.slug-16-ans         { background-size:contain; width:30px; height:30px; background-image: url('./img/picto-16-ans-black.png'); }
+.film .info .public.slug-18-ans         { background-size:contain; width:30px; height:30px; background-image: url('./img/picto-18-ans-black.png'); }
+
+/*.film .info .public { display:none; }*/
+
+.film .resume{ position:absolute; top:350px; left:15px; color:#000; width:510px; height:100px; overflow:hidden; font-size:16px; }
+.film .resume label { color: #5599C8; font-family: 'Futura Condensed'; }
+.film .resume span { font-family: 'Futura Condensed'; }
+
+
+.film ul.seances {position: absolute; margin-left:-36px; text-transform:lowercase; list-style:none; line-height:14px; top: 457px; left:15px; width: 540px; height:150px; /*overflow:hidden;*/ color:#000; font-size:14px;  }
+
+.film ul.seances li.col { display:inline-block; width:76px; height: 50px; padding-left:0px; float:left; margin-top: 8px; }
+
+/*.film .seances .horaire .version { display:inline !important; margin-left:3px; color:red; }*/
+/*.film .seances .horaire .version.slug-vf { display:none; }*/
+.film .seances .horaire .version.slug-vf { display:none; }
+.film .seances .horaire .version.slug-vo { display:inline !important; margin-left:3px; color:red; }
+.film .seances .horaire .version.slug-vost { display:inline !important; margin-left:3px; color:red; }

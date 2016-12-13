@@ -1,0 +1,64 @@
+@font-face{
+  font-family: 'Cascade';
+  src: url('./fonts/cascadescript-std-webfont.eot');
+  src: url('./fonts/cascadescript-std-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/cascadescript-std-webfont.woff') format('woff'),
+       url('./fonts/cascadescript-std-webfont.ttf') format('truetype'),
+       url('./fonts/cascadescript-std-webfont.svg#trajan-pro-regular') format('svg');
+  font-weight: normal;
+  font-style: normal
+}
+
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  /* overflow:hidden;  permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+}
+.conteneur {
+  /*background:url('./img/fullscreen-vertical-bg.png') no-repeat;*/
+  background: #FFECCA;
+  background-size: contain;
+  background-size: contain;
+  font-family: Helvetica, Arial, sans-serif; 
+  color:#000; 
+  position:relative;
+  margin:0 auto;
+  height:1920px;
+  width:1080px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.clock {display: none;}
+
+.title {font-size: 80px;text-transform: uppercase;font-weight: bold;text-align: center;padding-top: 30px;}
+
+.arrow {float:right;width:80px;height:80px;margin-left: 30px;background: url('./img/arrow.png') 0 0 no-repeat}
+
+
+/* 6 salles */
+ul.salles-6 { position: absolute; top: 154px; margin: 0; padding: 0; left:0; right:0; list-style:none; /*background : blue;*/ }
+ul.salles-6 li.salle { height: 136px; line-height:62px; margin-bottom: 40px; background: #ff9221 url('./img/salle-red.png') 0 0 no-repeat; background-size:contain; width: 100%;}
+ul.salles-6 li.salle > .nom { display:none; }
+ul.salles-6 li.salle > .type { display:none; }
+ul.salles-6 li.salle > .numero { display:block; font-size: 90px; font-family: 'Cascade'; color:#fff; position: absolute; left: 40px; line-height: 132px;}
+
+ul.salles-6 li.salle .film { position:absolute; padding:  32px 0 0 110px; }
+ul.salles-6 li.salle .film .seances { padding:0; list-style:none; width: 500px; }
+ul.salles-6 li.salle .film .seances li { display: none; } /* on n'affiche pas les séances mais on les garde dans le dom pour afficher le bon film en fonction de l'heure */
+ul.salles-6 li.salle .film .seances li.horaire span { }
+ul.salles-6 li.salle .film .seances li.horaire span:before { content:"Séance à : "; text-transform: uppercase;}
+ul.salles-6 li.salle .film .seances li.selected { display:block; }
+ul.salles-6 li.salle .film .titre { overflow: hidden; width:750px; text-overflow: ellipsis; white-space: nowrap; font-size: 60px; line-height: 88px; }
+ul.salles-6 li.salle .film .info { position:absolute; right:24px; top:2px; }
+
+ul.salles-6 li.salle .nb-places { display: none; }
+
+ul.salles-6 li.salle .feu { display: block ; width: 266px; height: 136px; background: #ff9221; position: absolute; right: 0; background-repeat:no-repeat; background-position: center center; background-size:contain;}
+ul.salles-6 li.salle .feu span { background-repeat:no-repeat; background-position: center center; background-size:contain; width: 246px; height: 116px; display: block; position: absolute; left: 10px; top: 10px;}
+
+/* feux communs au salles-4 et salles-6 */
+ul.salles-4 li.salle .feu.vert span, ul.salles-6 li.salle .feu.vert span { background-image: url('./img/feu-vert.png'); }
+ul.salles-4 li.salle .feu.rouge span, ul.salles-6 li.salle .feu.rouge span { background-image: url('./img/feu-rouge.png'); } 

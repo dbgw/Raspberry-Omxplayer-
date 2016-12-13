@@ -1,0 +1,29 @@
+html,
+body {
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden;/* permet de masquer les trucs qui dépassent - à enlever si la machine de test est dans une résolution moins élevée et que le scroll est nécessaire */
+}
+.conteneur {
+  background: #fff url('./img/entree-salles-plus-cabine-horizontal-bg.jpg');
+  background-size: contain;
+  font-family: Arial, Helvetica, sans-serif; 
+  color:#000; 
+  position:relative;
+  margin:0 auto;
+  width:768px;
+  height:1280px;
+}
+
+.clock { position:absolute; top:50px; right:30px; color:#000000; font-weight:bold;}
+
+ul.salles { width: 708px; height:100%; position:absolute; top:100px; left:30px; padding: 0 ; }
+
+.salle { width: 100%; list-style:none; text-align:left; margin:0 0 20px 0; padding:0; font-size:30px; font-weight: bold; }
+.salle > span { display:inline-block; vertical-align:top; width: 48px; }
+
+.salle .film, .salle .film .titre, .salle .film .etat  { display:inline-block; vertical-align:top;  }
+.salle .film .titre { width: 320px;  }
+.salle .film .titre span { overflow: hidden; text-overflow:ellipsis; white-space:nowrap; display: block; }
+.salle .film .etat {  width: 340px; }

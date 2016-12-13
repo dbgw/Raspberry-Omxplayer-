@@ -1,0 +1,156 @@
+{{#salles}}
+<div class="numero-salle slug-{{slug}}"><span>{{numero}}</span></div>
+{{#films}}
+  <div class="film">
+    <div class="titre"><span>{{title}}</span></div>
+    <div class="carousel">
+      <div class="affiche carousel-item first-element">
+        <img src="{{affiche_url}}">
+      </div>
+      {{#photos}}
+      <div class="photo carousel-item">
+        <img src="{{url}}">
+      </div>
+      {{/photos}}
+      {{#trailer_url}}
+      <div class="video carousel-item">
+        <video id="trailer-{{id}}">
+          <source src="{{ trailer_url }}" type="video/mp4">
+          Votre navigateur ne gère pas l'élément <code>video</code>.
+        </video>
+      </div>
+      {{/trailer_url}}
+      <div class="casting carousel-item">
+        {{#realisateur}}
+          <div class="realisateur"><label>Réalisateur :</label><br><span>{{realisateur}}</span></div>
+        {{/realisateur}}
+        {{#interpretes}}
+          <div class="interpretes"><label>Avec :</label><br><span>{{interpretes}}</span></div>
+        {{/interpretes}}
+      </div>
+      {{#resume}}
+      <div class="synopsis carousel-item">
+        <div class="resume"><span>{{resume}}</span></div>
+      </div>
+      {{/resume}}
+    </div>
+    <ul class="seances">
+      {{#seances}}
+        <li class="horaire"><span>{{horaire}}</span><div class="version slug-{{version}} horaire-{{horaire}}" style="display:none;"><span>{{version}}</span></div></li>
+        <li class="delimiter"></li>
+      {{/seances}}
+    </ul>
+    <div class="info">
+      {{#duree}}<div class="duree"><span>{{duree}}</span></div>{{/duree}}
+      {{#seances}}<div class="version slug-{{version}} horaire-{{horaire}}" style="display:none;"><span>{{version}}</span></div>{{/seances}}
+      {{#public}}<div class="public slug-{{slug}}"><span>{{name}}</span></div>{{/public}}
+      {{#dimension}}<div class="dimension slug-{{slug}}"><span>{{name}}</span></div>{{/dimension}}
+    </div>
+  </div>
+{{/films}}
+</div>
+{{/salles}}
+
+<script>
+// Mise en forme des horaires
+$('.seances').each(function() {
+  // Liste des délimiteurs (tirets)
+  var delimiters = $(this).find('.delimiter');
+  // Remplacement du délimiteur par un BR à chaque fin de ligne (on part du principe qu'il y a 3 éléments par ligne)
+  var nbElementsPerLine = 3;
+  for (var i = nbElementsPerLine - 1, len = delimiters.length; i < len; i += nbElementsPerLine) {
+    $(delimiters[i]).replaceWith('<br />');
+  }
+  // Suppression du dernier délimiteur
+  delimiters.last().remove();
+});
+
+// mise en forme des interprètes, on remplace les virgules par des retours chario
+$('.interpretes').each(function() {
+  var interpretes = $(this).find('span').html();
+  $(this).find('span').html(interpretes.replace(/,/g, '<br>'));
+});
+
+
+// On masque les films et on affiche le premier 
+$('.film').hide().first().show();
+
+// On masque tous les éléments du carousel d'un film et on affiche le premier
+$('.film').first().find('.carousel-item').hide().first().show();
+
+// Défilement sur les éléments du carousel d'un film puis, de film en film.
+var carouselTimeout;
+carouselLoop();
+function carouselLoop() {
+  // le film courant est toujours le premier dans le DOM
+  var current_film = $('.film').first();
+  
+  // on masque le carousel-item courant et on le met à la fin du DOM dans film
+  current_film.find('.carousel-item').first().hide().insertAfter(current_film.find('.carousel-item').last());
+
+  // on affiche l'élément suivant
+  current_film.find('.carousel-item').first().show();
+  
+  // si l'élément suivant est le premier du carousel, ça veut dire qu'on a fait le tour => on passe au film suivant
+  // si il y a un film suivant
+  if($('.film').length > 1) {
+    if(current_film.find('.carousel-item').first().hasClass('first-element')) {
+      // on met le film courant à la fin du DOM
+      $('.film').first().hide().insertAfter($('.film').last());
+      // on affiche le premier film du DOM
+      $('.film').first().show();
+      // on affiche le premier élément du carousel du film courant
+      $('.film').first().find('.carousel-item').hide().first().show();
+    }
+  }
+
+  // si l'item est une video, on lance
+  if($('.film').first().find('.carousel-item').first().hasClass('video')) {
+    var video = $('.film').first().find('.carousel-item').first().find('video')[0];
+    video.play();
+    video.onended = function(e) {
+      carouselLoop();
+    };
+
+  } 
+  else {
+    // on détermine l'intervalle en fonction du type d'item
+    // par défaut, 6 secondes, sauf pour le synopsis (12 sec)
+    var carouselInterval = 6000;
+    if($('.film').first().find('.carousel-item').first().hasClass('synopsis'))
+      carouselInterval = 40000;
+
+    carouselTimeout = setTimeout(carouselLoop, carouselInterval);
+  }
+}
+ 
+// Mise à jour des horaires sélectionnés toutes les minutes
+initUpdates();
+function initUpdates() {
+  // Sélection de la séance le plus proche
+  // Date actuelle moins 20 minutes (durée de sélection de l'horaire après le début de la séance)
+  var now = new Date((new Date()).getTime() - 20 * 60 * 1000);
+  // Déselectionner toutes les séances
+  $('.film .seances .horaire').removeClass('selected');
+  // Pour chaque film, on détermine s'il y a une séance proche
+  $('.film .seances').each(function() {
+    var horaires = $(this).find('.horaire');
+    for (var i = 0, len = horaires.length; i <len; i++) {
+      // On sélectionne la première séance à venir
+      if (isIncoming($(horaires[i]).find('span').first().text(), now)) {
+        $(horaires[i]).addClass('selected');
+        // Afficher la version correspondant à la séance choisie (cela peut différer d'une séance à l'autre)
+        $(horaires[i]).parents('.film').find('.version.horaire-'+$(horaires[i]).find('span').first().text()).show();
+        break;
+      }
+    }
+  });
+  setTimeout(initUpdates, 60000);
+}
+
+// pour le debug
+function pause() { clearInterval(carouselTimeout); }
+function start() { carouselLoop(); }
+
+
+</script>
