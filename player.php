@@ -64,15 +64,45 @@ else
 ?>
 
 
+
+function checkOmxplayer()
+{
+	var xhrUp=getXhr();
+	
+		xhrUp.onreadystatechange = function(){
+		
+			if(xhrUp.readyState == 4 && xhrUp.status == 200){
+			    console 
+				var str=xhrUp.responseText;
+					if(str=='oui')
+					{
+					 return true;
+					}
+			}
+		}
+		console.log ( "checkOmxplayer.php");
+	xhrUp.open("POST","checkOmxplayer.php",true);
+	xhrUp.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+	xhrUp.send();
+}
+
+
 function nextPage()
 {
- var adresse='player.php?index='+index;
- document.location.href=adresse;
+	
+	 var adresse='player.php?index='+index;
+	 document.location.href=adresse;
 }
 
 function next()
 	{
+		console.log("check update before next");
 		checkUpdate();
+		 console.log("checking omxplayer");
+	 if  (checkOmxplayer() == true)  {
+		 alert ('omxplayer is running');
+		 return;
+	 }	 	
 		index++;
 			if(index < obj.ELEMENT.length)
 			{
@@ -109,9 +139,11 @@ function checkUpdate()
 	
 		xhrUp.onreadystatechange = function(){
 		
+		
 			if(xhrUp.readyState == 4 && xhrUp.status == 200){
-			
+				
 				var str=xhrUp.responseText;
+				console.log ("onreadystatechange"+xhrUp.readyState+" "+str );
 					if(str=='oui')
 					{
 					document.location.href="player_final.php";

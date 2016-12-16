@@ -7,37 +7,81 @@
 <body>
 <?php
 
-if(isset($_POST['enr']))
+if(isset($_POST['hauteurEcran']))
 {
-
-echo 'test';
+	echo 'Enregistrement config';
+	$hauteurEcran      = $_POST["hauteurEcran"];
+	$largeurEcran      = $_POST["largeurEcran"];
+	$hauteurAffichage  = $_POST["hauteurAffichage"];
+	$largeurAffichage  = $_POST["largeurAffichage"];
+	$rotationAffichage = $_POST["rotationAffichage"];
+	$sconfig = "
+		<?php
+				define('HAUTEUR_ECRAN'    ,$hauteurEcran); //1080
+				define('LARGEUR_ECRAN'    ,$largeurEcran);//1920
+				define('HAUTEUR_AFFICHAGE',	$hauteurAffichage );//1060
+				define('LARGEUR_AFFICHAGE',$largeurAffichage);//1904000
+				define('ROTATION_AFFICHAGE',$rotationAffichage);
+				define('PLAYER_ID','play_578397bcad69b');
+				?>";
+	file_put_contents('config_affichage.php',$sconfig);
+	
 }
 	if (file_exists('config_affichage.php'))
 	{
 		//si déjà configuré chargement des paramètres
 		include('config_affichage.php');
 	}
-echo HAUTEUR_ECRAN ;
+
 ?>
+<h1>  PARAMETRAGE ECRAN </h1>
+<table> 
 <form id="form1" name="form1" method="post" action="">
-  <label>
+  <tr><td>
   Hauteur Ecran
+  </td><td>
   <input type="text" name="hauteurEcran" id="hauteurEcran" value="<?php echo HAUTEUR_ECRAN ; ?>" />
-  <br />
+  </td></tr>
+  
+  <tr><td>
   Largeur Ecran
-  <input type="text" name="largeurEcran" id="largeurEcran" />
-  <br />
-  Hauteur Affichage
-  <input type="text" name="hauteurAffichage" id="hauteurAffichage" />
-  <br />
+  </td>
+  <td>
+  <input type="text" name="largeurEcran" id="largeurEcran"  value="<?php echo LARGEUR_ECRAN ; ?>"/>
+  </td>
+  </tr>
+  
+  
+  <tr><td>
+    Hauteur Affichage
+  </td>
+  <td>
+  <input type="text" name="hauteurAffichage" id="hauteurAffichage"  value="<?php echo HAUTEUR_AFFICHAGE ; ?>" />
+  </td>
+  </tr>
+  
+  <tr>
+  <td>
   Largeur Affichage
-  <input type="text" name="largeurAffichage" id="largeurAffichage" />
-  <br />
-  Rotation Affichage
-  <input type="text" name="rotationAffichage" id="rotationAffichage" />
-  <br />
-  <input type="submit" name="enr" id="enr" value="Enregistrer" />
-  </label>
+  </td>
+  <td>
+  <input type="text" name="largeurAffichage" id="largeurAffichage"  value="<?php echo LARGEUR_AFFICHAGE ; ?>"/>
+  </td>
+  </tr>
+  
+  <tr><td> 
+	  Rotation Affichage
+  </td>
+  <td>
+  <input type="text" name="rotationAffichage" id="rotationAffichage"   value="<?php echo ROTATION_AFFICHAGE ; ?>"/>
+  </td>
+  </tr>
+  <tr><td>
+  <button> Enregistrer</button></td>
+  <td>
+  <a href="/player_final.php">Redemarrer</a>
+  </td></tr>
 </form>
+	</table>
 </body>
 </html>
