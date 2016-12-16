@@ -36,11 +36,9 @@ if(isset($donnees["BANDEAU_HAUT"]))
 echo '<video id="videoPlayer" src="VIDEOS/'.$donnees["FICHIER"].'" autoplay="true"  style="display:block; z-index:0; width:'.$largeur.'px; height:'.$hauteur.'px; vertical-align:middle;">
 </video>';
 
-/*
-echo '<video id="videoPlayer" autoplay="true"  style="display:block; z-index:0; width:'.$largeur.'px; height:'.$hauteur.'px; vertical-align:middle;">
-</video>';
-*/
-        require_once 'juggler/omxplayer-web-controls-php/cfg.php';
+/// ATTENTION DEVELOPPEMENT EN COURS
+
+    require_once 'juggler/omxplayer-web-controls-php/cfg.php';
         $file = "VIDEOS/".$donnees['FICHIER'];
     	exec('pgrep omxplayer', $pids);  //omxplayer	
 		//if ( empty($pids) ) {
@@ -48,15 +46,16 @@ echo '<video id="videoPlayer" autoplay="true"  style="display:block; z-index:0; 
 		  posix_mkfifo(FIFO, 0777);
 		  chmod(FIFO, 0777);
 		  //$cmd = getcwd().'/omx_php.sh '.escapeshellarg($file)." "."'754 588 1024 748'";
-		   $cmd = "juggler/omxplayer-web-controls-php/omx_php.sh ".escapeshellarg($file)." "."'".((HAUTEUR_ECRAN - HAUTEUR_AFFICHAGE )/2)." ".((LARGEUR_ECRAN - LARGEUR_AFFICHAGE )/2). " ".LARGEUR_AFFICHAGE." ".HAUTEUR_AFFICHAGE."'";
-	      //shell_exec( $cmd );
-		  //$out = $cmd; 
+		   $cmd = "juggler/omxplayer-web-controls-php/omx_php.sh ".escapeshellarg($file)." "."'".((HAUTEUR_ECRAN - HAUTEUR_AFFICHAGE )/2)." ".((LARGEUR_ECRAN - LARGEUR_AFFICHAGE )/2). " ".HAUTEUR_AFFICHAGE." ".LARGEUR_AFFICHAGE."'";
+	      shell_exec( $cmd );
+		   
 	    // } else {
 	     	$err = 'omxplayer is already runnning';
 	   //  }
 		$out = 'playing '.basename($file);
 	    echo $out;
-	    
+
+//// FIN DEV EN COURS	    
 	    
 	    
 	    
